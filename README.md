@@ -2,7 +2,7 @@
   <strong>
     <p>GymPoint</p>
     <p>Desafio do GoStack 9.0 da Rocketseat</p>
-    [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=GymPoint&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fwill-souza97%2Fgympoint%2Fmaster%2FInsomnia_button.json)
+    <a href="https://insomnia.rest/run/?label=GymPoint&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fwill-souza97%2Fgympoint%2Fmaster%2FInsomnia_button.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
   </strong>
 </h1>
 
