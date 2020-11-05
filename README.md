@@ -1,6 +1,6 @@
 <h1 align="center">
   <strong>
-    <p>GymPoint</p>
+    <p><img src="https://raw.githubusercontent.com/amauryeuzebio/bootcamp-gympoint/master/imgs-readme/logo.png" alt="GymPoint"></p>
     <p>Desafio do GoStack 9.0 da Rocketseat</p>
     <a href="https://insomnia.rest/run/?label=GymPoint&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fwill-souza97%2Fgympoint%2Fmaster%2FInsomnia_button.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
   </strong>
@@ -20,8 +20,13 @@
 <ul>
   <li>Node.JS</li>
   <li>Express</li>
-  <li>Docker ( Utilizado para configurar uma imagem de um Banco de Dados )</li>
-  <li>PostgreSQL ( Banco de Dados escolhido para a aplicação )</li>
+  <li>Docker ( Utilizado para baixar uma imagem de um Banco de Dados para poder ser utilizada no projeto)</li>
+  <li>Banco de Dados Utilizados no Projeto</li>
+  <ul>
+    <li>PostgresSQL</li>
+    <li>MongoDB</li>
+    <li>Redis</li>
+  </ul>
 </ul>
 
 <h3>
