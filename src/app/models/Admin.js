@@ -1,5 +1,5 @@
-import Sequelize, { Model } from 'sequelize';
 import bcrypt from 'bcryptjs';
+import Sequelize, { Model } from 'sequelize';
 
 class Admin extends Model {
   static init(sequelize) {
