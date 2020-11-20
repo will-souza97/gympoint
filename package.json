@@ -5,7 +5,11 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "dev:debug": "nodemon --inspect src/server.js"
+    "dev:debug": "nodemon --inspect src/server.js",
+
+    "startDB": "sudo docker start postgres && sudo docker start mongodb && sudo docker start redis",
+    "stopDB": "sudo docker stop postgres && sudo docker stop mongodb && sudo docker stop redis"
+
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

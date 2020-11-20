@@ -3,9 +3,9 @@ import Sequelize from 'sequelize';
 import Admin from '../app/models/Admin';
 import databaseConfig from '../config/database';
 import Student from '../app/models/Student';
+import Plans from '../app/models/Plans';
 
-const modelsAdmin = [Admin];
-const modelsStudent = [Student];
+const models = [Admin, Student, Plans];
 
 class Database {
   constructor() {
@@ -14,9 +14,7 @@ class Database {
 
   init() {
     this.connection = new Sequelize(databaseConfig);
-
-    modelsAdmin.map((model) => model.init(this.connection));
-    modelsStudent.map((model) => model.init(this.connection));
+    models.map((model) => model.init(this.connection));
   }
 }
 
