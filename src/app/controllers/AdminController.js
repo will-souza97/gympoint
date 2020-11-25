@@ -18,7 +18,7 @@ class AdminController {
     });
 
     if (adminExists) {
-      return res.status(400).json({ Error: 'Admin already exists' });
+      return res.status(400).json({ Error: 'This Admin already exists' });
     }
 
     const { id, name, email } = await Admin.create(req.body);
@@ -45,14 +45,19 @@ class AdminController {
       return res.status(400).json({ Error: 'Validation failed' });
     }
 
-    const { email, oldPassword } = req.body;
     const admin = await Admin.findByPk(req.adminId);
+
+    if (!admin) {
+      return res.status(400).json({ Error: "This Admin doesn't exists!" });
+    }
+
+    const { email, oldPassword } = req.body;
 
     if (email !== admin.email) {
       const adminExists = await Admin.findOne({ where: { email } });
 
       if (adminExists) {
-        return res.status(400).json({ Error: 'Admin already exists' });
+        return res.status(400).json({ Error: 'This Admin already exists' });
       }
     }
 
@@ -63,9 +68,9 @@ class AdminController {
       });
     }
 
-    const { id, name } = await admin.update(req.body);
+    await admin.update(req.body, { where: req.adminId });
 
-    return res.json({ id, name, email });
+    return res.json({ id: admin.id, name: admin.name, email: admin.email });
   }
 }
 
