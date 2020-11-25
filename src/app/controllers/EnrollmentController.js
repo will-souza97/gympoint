@@ -1,9 +1,12 @@
 import * as Yup from 'yup';
-import { startOfDay, parseISO, isBefore, addMonths } from 'date-fns';
+import { startOfDay, parseISO, isBefore, addMonths, format } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 
 import Student from '../models/Student';
 import Plans from '../models/Plans';
 import Enrollment from '../models/Enrollment';
+
+import Mail from '../../lib/Mail';
 
 class EnrollmentController {
   async index(req, res) {
@@ -118,6 +121,21 @@ class EnrollmentController {
       price: plan.duration * plan.price,
     });
 
+    await Mail.sendMail({
+      to: `${student.name} <${student.email}>`,
+      subject: 'Cadastro Realizado com Sucesso',
+      template: 'subscription',
+      context: {
+        student: student.name,
+        plan: plan.title,
+        end_date: format(enrollment.end_date, "'Dia' dd 'de' MMMM 'de yyyy'", {
+          locale: pt,
+        }),
+        totalPrice: enrollment.price,
+        priceMonth: plan.price,
+      },
+    });
+
     return res.status(201).json(enrollment);
   }
 
@@ -171,6 +189,15 @@ class EnrollmentController {
     return res.status(200).json(enrollment);
   }
 
-  // async delete(req, res) {}
+  async delete(req, res) {
+    const enrollment = await Enrollment.findByPk(req.params.id);
+
+    if (!enrollment) {
+      return res.status(400).json({ Error: "Enrollment doesn't exists!" });
+    }
+
+    await enrollment.destroy();
+    return res.status(200).json(enrollment);
+  }
 }
 export default new EnrollmentController();

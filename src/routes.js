@@ -30,5 +30,6 @@ routes.get('/enrollment', EnrollmentController.index);
 routes.get('/enrollment/:id', EnrollmentController.show);
 routes.post('/enrollment', EnrollmentController.store);
 routes.put('/enrollment/:id', EnrollmentController.update);
+routes.delete('/enrollment/:id', EnrollmentController.delete);
 
 export default routes;
