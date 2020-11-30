@@ -128,7 +128,7 @@ class EnrollmentController {
       context: {
         student: student.name,
         plan: plan.title,
-        end_date: format(enrollment.end_date, "'Dia' dd 'de' MMMM 'de yyyy'", {
+        end_date: format(enrollment.end_date, "'Dia' dd 'de' MMMM 'de' yyyy", {
           locale: pt,
         }),
         totalPrice: enrollment.price,
