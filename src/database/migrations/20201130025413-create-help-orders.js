@@ -1,18 +1,18 @@
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('help_oders', {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.createTable('help_orders', {
       id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         autoIncrement: true,
+        allowNull: false,
         primaryKey: true,
       },
       student_id: {
         type: Sequelize.INTEGER,
         references: { model: 'students', key: 'id' },
+        allowNull: false,
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
-        allowNull: true,
       },
       question: {
         type: Sequelize.STRING,
@@ -20,11 +20,11 @@ module.exports = {
       },
       answer: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       answer_at: {
-        type: Sequelize.DATA,
-        allowNull: false,
+        type: Sequelize.DATE,
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -37,7 +37,7 @@ module.exports = {
     });
   },
 
-  down: async (queryInterface) => {
-    return queryInterface.dropTable('help_oders');
+  down: (queryInterface) => {
+    return queryInterface.dropTable('help_orders');
   },
 };

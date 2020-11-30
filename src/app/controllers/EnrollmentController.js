@@ -9,37 +9,6 @@ import Enrollment from '../models/Enrollment';
 import Mail from '../../lib/Mail';
 
 class EnrollmentController {
-  async index(req, res) {
-    const { page = 1 } = req.query;
-
-    const enrollments = await Enrollment.findAll({
-      attributes: [
-        'id',
-        'start_date',
-        'end_date',
-        'student_id',
-        'plan_id',
-        'price',
-      ],
-      limit: 10,
-      offset: (page - 1) * 10,
-      include: [
-        {
-          model: Plans,
-          as: 'plan',
-          attributes: ['title'],
-        },
-        {
-          model: Student,
-          as: 'student',
-          attributes: ['name', 'email'],
-        },
-      ],
-    });
-
-    return res.json(enrollments);
-  }
-
   async show(req, res) {
     const enrollment = await Enrollment.findOne({
       where: { id: req.params.id },
@@ -70,6 +39,37 @@ class EnrollmentController {
     }
 
     return res.json(enrollment);
+  }
+
+  async index(req, res) {
+    const { page = 1 } = req.query;
+
+    const enrollments = await Enrollment.findAll({
+      attributes: [
+        'id',
+        'start_date',
+        'end_date',
+        'student_id',
+        'plan_id',
+        'price',
+      ],
+      limit: 10,
+      offset: (page - 1) * 10,
+      include: [
+        {
+          model: Plans,
+          as: 'plan',
+          attributes: ['title'],
+        },
+        {
+          model: Student,
+          as: 'student',
+          attributes: ['name', 'email'],
+        },
+      ],
+    });
+
+    return res.json(enrollments);
   }
 
   async store(req, res) {
