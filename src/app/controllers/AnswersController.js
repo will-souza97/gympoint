@@ -1,5 +1,9 @@
 import * as Yup from 'yup';
 import HelpOrder from '../models/Help_order';
+import Student from '../models/Student';
+
+import AnswerMail from '../jobs/AnswerMail';
+import Queue from '../../lib/Queue';
 
 class AnswersController {
   async store(req, res) {
@@ -20,12 +24,21 @@ class AnswersController {
       return res.status(400).json({ error: 'Order does not exist' });
     }
 
+    const student = await Student.findOne({
+      where: { id: helpOrder.student_id },
+    });
+
     const { answer } = req.body;
 
     const date = new Date();
     helpOrder.answer = answer;
     helpOrder.answer_at = date;
     await helpOrder.save();
+
+    await Queue.add(AnswerMail.key, {
+      helpOrder,
+      student,
+    });
 
     return res.json(helpOrder);
   }

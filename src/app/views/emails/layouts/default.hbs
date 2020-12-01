@@ -6,10 +6,6 @@
     --text-color: #999999;
   }
 
-  body {
-    display: flex;
-    justify-content: center;
-  }
 
   #container {
     border: 1px solid var(--text-color);
@@ -28,6 +24,7 @@
   #container #card .info,
   #container #card #dados label,
   #container #card #detalhes label,
+  #container #card #resposta,
   #container #card #total {
     font-weight: bold;
   }
@@ -74,6 +71,8 @@
   }
 
   #container #card #dados div,
+  #container #card #pergunta div,
+  #container #card #resposta div,
   #container #card #detalhes div,
   #container #card #total {
     padding: 7px 0;
@@ -86,6 +85,8 @@
   }
 
   #container #card #dados,
+  #container #card #pergunta,
+  #container #card #resposta,
   #container #card #detalhes,
   #container #card #total {
     display: grid;
@@ -93,6 +94,8 @@
 
   #container #card .info,
   #container #card #dados,
+  #container #card #pergunta,
+  #container #card #resposta,
   #container #card #detalhes,
   #container #card #total {
     margin: 20px;
@@ -100,6 +103,19 @@
 
   #container #card #dados {
     grid-template-columns: 2fr 2fr;
+  }
+
+  #container #card #pergunta,
+  #container #card #resposta {
+    padding: 10px;
+    font-size: 0.9em;
+  }
+
+  #container #card #pergunta {}
+
+  #container #card #resposta {
+    background: var(--color-base);
+    color: #fff;
   }
 
   #container #card #detalhes,
@@ -136,23 +152,21 @@
       font-size: 0.7em;
     }
 
+    #container #card #pergunta,
+    #container #card #resposta {
+      font-size: 0.8em;
+    }
+
     #container #card #dados,
     #container #card #detalhes,
     #container #card #total,
     #container #card footer {
       font-size: 0.8em;
     }
-
-    #container #card .info,
-    #container #card #dados,
-    #container #card #detalhes,
-    #container #card #total {
-      margin: 10px;
-    }
   }
 </style>
 
-<section id="container">
+<section class="navbar navbar-expand-lg navbar-light bg-light" id="container">
   <!-- Logo do Email -->
   <header id="logo">
     <img src="https://raw.githubusercontent.com/amauryeuzebio/bootcamp-gympoint/master/imgs-readme/logo.png"

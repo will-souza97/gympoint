@@ -1,12 +1,12 @@
 import * as Yup from 'yup';
-import { startOfDay, parseISO, isBefore, addMonths, format } from 'date-fns';
-import pt from 'date-fns/locale/pt';
+import { startOfDay, parseISO, isBefore, addMonths } from 'date-fns';
 
 import Student from '../models/Student';
 import Plans from '../models/Plans';
 import Enrollment from '../models/Enrollment';
 
-import Mail from '../../lib/Mail';
+import SubscriptionMail from '../jobs/SubscriptionMail';
+import Queue from '../../lib/Queue';
 
 class EnrollmentController {
   async show(req, res) {
@@ -121,30 +121,10 @@ class EnrollmentController {
       price: plan.duration * plan.price,
     });
 
-    await Mail.sendMail({
-      to: `${student.name} <${student.email}>`,
-      subject: 'Parabens, sua Matricula foi efetuada com Sucesso! 🎉️🎉️',
-      template: 'subscription',
-      context: {
-        student: student.name,
-        plan: plan.title,
-        duration: {
-          numberMonths: plan.duration,
-          months: plan.duration > 1 ? `Meses` : `Mes`,
-        },
-        totalPrice: enrollment.price,
-        priceMonth: plan.price,
-        start_date: format(
-          enrollment.start_date,
-          "'Dia' dd 'de' MMMM 'de' yyyy",
-          {
-            locale: pt,
-          }
-        ),
-        end_date: format(enrollment.end_date, "'Dia' dd 'de' MMMM 'de' yyyy", {
-          locale: pt,
-        }),
-      },
+    await Queue.add(SubscriptionMail.key, {
+      student,
+      plan,
+      enrollment,
     });
 
     return res.status(201).json(enrollment);
