@@ -1,16 +1,59 @@
-<strong>Ola, {{ student }}</strong>
-<p>Sua Matricula foi efetuada com Sucesso, confira os dados abaixo:</p>
-<p>
-  <strong>Estudante: </strong> {{ student }} <br />
-  <strong>Data: </strong> {{ end_date }} <br /><br />
-  <strong>Plano: </strong> {{ plan }} <br /><br />
+<div>
+  <p class="title">Sua Matricula foi efetuada com Sucesso! \O/</p>
+  <p class="message">( Guarde uma cópia deste recibo.)</p>
+</div>
 
-<p>
-  <img
-    src="https://raw.githubusercontent.com/will-souza97/gympoint-backend/master/src/app/views/emails/img/{{ plan }}.png">
-</p>
+<!-- Informações sobre os Dados Cadastrados -->
+<p class="info">Informações do seu Cadastro:</p>
+<div id="dados">
+  <div>
+    <label>Tipo do Plano:</label>
+    <div>{{ plan }}</div>
+  </div>
 
-<strong>Total: </strong> {{ totalPrice }} <br /><br />
-<strong>Preço/Mes: </strong> {{ priceMonth }} <br /><br />
+  <div>
+    <label>Data do Cadastro:</label>
+    <div>{{ start_date }}</div>
+  </div>
 
-</p>
+  <div>
+    <label>Duração do Plano:</label>
+    <div>{{ duration.numberMonths }} {{ duration.months }}</div>
+  </div>
+
+  <div>
+    <label>Data Termino do Plano:</label>
+    <div>{{ end_date }}</div>
+  </div>
+</div>
+
+<!-- Informações sobre os Detalhes do Pagamento -->
+<p class="info">Detalhes do pagamento:</p>
+<div id="detalhes">
+  <div>
+    <label>Descrição:</label>
+    <div>{{ plan }}</div>
+  </div>
+
+  <div>
+    <label>Distribuidora:</label>
+    <div>GymPoint</div>
+  </div>
+
+  <div>
+    <label>Preço:</label>
+    <div>{{ duration.numberMonths }}x R$ {{ priceMonth }}</div>
+  </div>
+</div>
+
+<!-- Pagamento Final -->
+<p class="info"></p>
+<div id="total">
+  <div></div>
+  <label>TOTAL [BRL]</label>
+  <div>R$ {{ totalPrice }}</div>
+</div>
+
+<footer>
+  Abraços, Equipe GymPoint
+</footer>

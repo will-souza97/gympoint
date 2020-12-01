@@ -1,12 +1,167 @@
-<div
-  style="
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    color: #222;
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+  :root {
+    --color-base: #f82960;
+    --text-color: #999999;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+  }
+
+  #container {
+    border: 1px solid var(--text-color);
     max-width: 600px;
-  "
->
-  {{{ body }}}
-  {{> footer }}
-</div>
+    padding: 10px;
+    font-family: "Roboto", sans-serif;
+  }
+
+  #container header {
+    display: flex;
+    justify-content: center;
+  }
+
+  #container #card .name,
+  #container #card .title,
+  #container #card .info,
+  #container #card #dados label,
+  #container #card #detalhes label,
+  #container #card #total {
+    font-weight: bold;
+  }
+
+  #container #card .name,
+  #container #card .title,
+  #container #card .message,
+  #container #card footer {
+    text-align: center;
+  }
+
+  #container #card .message,
+  #container #card .info,
+  #container #card #dados label,
+  #container #card #detalhes label,
+  #container #card footer {
+    color: var(--text-color);
+  }
+
+  #container #card .info,
+  #container #card footer {
+    font-size: 0.9em;
+  }
+
+  #container #card .name {
+    background: var(--color-base);
+    color: #fff;
+    padding: 15px;
+    font-size: 1.2em;
+  }
+
+  #container #card .title {
+    color: var(--color-base);
+    font-size: 1em;
+  }
+
+  #container #card .message {
+    padding: 0 0 20px;
+    font-size: 0.8em;
+  }
+
+  #container #card .info {
+    border-bottom: 1px solid var(--text-color);
+  }
+
+  #container #card #dados div,
+  #container #card #detalhes div,
+  #container #card #total {
+    padding: 7px 0;
+  }
+
+  #container #card #dados,
+  #container #card #detalhes,
+  #container #card #total {
+    font-size: 1em;
+  }
+
+  #container #card #dados,
+  #container #card #detalhes,
+  #container #card #total {
+    display: grid;
+  }
+
+  #container #card .info,
+  #container #card #dados,
+  #container #card #detalhes,
+  #container #card #total {
+    margin: 20px;
+  }
+
+  #container #card #dados {
+    grid-template-columns: 2fr 2fr;
+  }
+
+  #container #card #detalhes,
+  #container #card #total {
+    grid-template-columns: 2fr 2fr 2fr;
+  }
+
+  #container #card #total {
+    color: var(--color-base);
+  }
+
+  #container #card footer {
+    padding-top: 20px;
+  }
+
+  @media (max-width: 370px) {
+    #container header img {
+      width: 50%;
+    }
+
+    #container #card .name {
+      font-size: 0.8em;
+    }
+
+    #container #card .title {
+      font-size: 0.8em;
+    }
+
+    #container #card .message {
+      font-size: 0.6em;
+    }
+
+    #container #card .info {
+      font-size: 0.7em;
+    }
+
+    #container #card #dados,
+    #container #card #detalhes,
+    #container #card #total,
+    #container #card footer {
+      font-size: 0.8em;
+    }
+
+    #container #card .info,
+    #container #card #dados,
+    #container #card #detalhes,
+    #container #card #total {
+      margin: 10px;
+    }
+  }
+</style>
+
+<section id="container">
+  <!-- Logo do Email -->
+  <header id="logo">
+    <img src="https://raw.githubusercontent.com/amauryeuzebio/bootcamp-gympoint/master/imgs-readme/logo.png"
+      alt="Logo GymPoint" />
+  </header>
+
+  <!-- Informações do Card -->
+  <section id="card">
+    <h1 class="name">Olá, {{ student }}!</h1>
+    {{{ body }}}
+  </section>
+</section>

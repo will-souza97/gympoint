@@ -123,16 +123,27 @@ class EnrollmentController {
 
     await Mail.sendMail({
       to: `${student.name} <${student.email}>`,
-      subject: 'Cadastro Realizado com Sucesso',
+      subject: 'Parabens, sua Matricula foi efetuada com Sucesso! 🎉️🎉️',
       template: 'subscription',
       context: {
         student: student.name,
         plan: plan.title,
+        duration: {
+          numberMonths: plan.duration,
+          months: plan.duration > 1 ? `Meses` : `Mes`,
+        },
+        totalPrice: enrollment.price,
+        priceMonth: plan.price,
+        start_date: format(
+          enrollment.start_date,
+          "'Dia' dd 'de' MMMM 'de' yyyy",
+          {
+            locale: pt,
+          }
+        ),
         end_date: format(enrollment.end_date, "'Dia' dd 'de' MMMM 'de' yyyy", {
           locale: pt,
         }),
-        totalPrice: enrollment.price,
-        priceMonth: plan.price,
       },
     });
 
