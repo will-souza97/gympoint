@@ -14,6 +14,7 @@ class AnswersController {
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'An answer is required' });
     }
+
     const { id } = req.params;
 
     const helpOrder = await HelpOrder.findOne({
@@ -28,11 +29,18 @@ class AnswersController {
       where: { id: helpOrder.student_id },
     });
 
+    if (!student) {
+      return res.status(400).json({ Error: "This Student doesn't exists" });
+    }
+
     const { answer } = req.body;
 
     const date = new Date();
-    helpOrder.answer = answer;
-    helpOrder.answer_at = date;
+
+    await helpOrder.update({
+      answer,
+      answer_at: date,
+    });
     await helpOrder.save();
 
     await Queue.add(AnswerMail.key, {
