@@ -20,8 +20,10 @@ routes.use(authMiddleware);
 routes.post('/admin', AdminController.store);
 routes.put('/admin', AdminController.update);
 
+routes.get('/student', StudentController.index);
 routes.post('/student', StudentController.store);
 routes.put('/student/:id', StudentController.update);
+routes.delete('/student/:id', StudentController.delete);
 
 routes.get('/plans', PlanController.index);
 routes.get('/plans/:id', PlanController.show);

@@ -2,6 +2,18 @@ import * as Yup from 'yup';
 import Student from '../models/Student';
 
 class StudentController {
+  async index(req, res) {
+    const { page = 1 } = req.query;
+
+    const listStudents = await Student.findAll({
+      order: ['id'],
+      limit: 20,
+      offset: (page - 1) * 20,
+    });
+
+    return res.json(listStudents);
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
@@ -60,6 +72,17 @@ class StudentController {
     }
 
     await student.update(req.body, { where: req.params.id });
+    return res.status(200).json(student);
+  }
+
+  async delete(req, res) {
+    const student = await Student.findByPk(req.params.id);
+
+    if (!student) {
+      return res.status(400).json({ Error: "This Student doesn't  exists" });
+    }
+
+    await student.destroy();
     return res.status(200).json(student);
   }
 }
